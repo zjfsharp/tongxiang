@@ -1,0 +1,10 @@
+# 在现有 location /txyx/ 块之后，追加以下内容：
+
+location /txyx/api/ {
+    proxy_pass         http://127.0.0.1:3001/;
+    proxy_http_version 1.1;
+    proxy_set_header   Host $host;
+    proxy_set_header   X-Real-IP $remote_addr;
+    # 注意：proxy_pass 末尾有 /，nginx 会自动去掉 /txyx/api 前缀
+    # 即：/txyx/api/groups → http://127.0.0.1:3001/groups
+}

@@ -1,0 +1,75 @@
+{
+  "code": "3052",
+  "password": "1234",
+  "school": "1111",
+  "members": [
+    "钟朱言",
+    "钟嘉烽",
+    "汤思怡"
+  ],
+  "createdAt": "2026-03-18T12:07:59.764Z",
+  "updatedAt": "2026-03-18T12:11:43.807Z",
+  "phase1": {
+    "questions": [
+      "这是想知道的问题1",
+      "这是想知道的问题2",
+      "这是想知道的问题3"
+    ],
+    "items": [
+      "📓 笔记本",
+      "✏️ 铅笔/彩笔",
+      "💧 水杯",
+      "📸 相机/手机",
+      "🌂 雨具（天气不好时）",
+      "🎒 背包"
+    ],
+    "route": "跟着老师的安排走",
+    "completedAt": "2026-03-18T12:08:52.125Z"
+  },
+  "phase2": {
+    "exhibition": {
+      "d1": "1",
+      "d2": "2",
+      "d3": "3",
+      "count": "3"
+    },
+    "sub1Done": true,
+    "equipment": [
+      {
+        "name": "111",
+        "function": "111111"
+      },
+      {
+        "name": "222",
+        "function": "22222"
+      },
+      {
+        "name": "333",
+        "function": "333"
+      },
+      {
+        "name": "4444",
+        "function": "33333334"
+      }
+    ],
+    "sub2Done": true,
+    "extra": {
+      "text": "发烧地方撒粉丝大"
+    },
+    "sub3Done": true,
+    "completedAt": "2026-03-18T12:11:35.740Z"
+  },
+  "phase3": {
+    "resolved": {
+      "0": "yes",
+      "1": "yes",
+      "2": "yes"
+    },
+    "reflection": "芳芳芳芳芳芳",
+    "completedAt": "2026-03-18T12:11:43.661Z"
+  },
+  "_pwd": "1234",
+  "phase1Done": true,
+  "phase2Done": false,
+  "phase3Done": false
+}
