@@ -148,173 +148,129 @@ async function renderRecords(content) {
     return
   }
 
-  const phaseLabel = { before: '行前', during: '行中', after: '行后' }
-  const items = groups.map(g => {
-    const phase = phaseLabel[g.phase] || g.phase || '行前'
-    const school = g.school ? `${g.school} · ` : ''
-    const updated = g.updatedAt ? new Date(g.updatedAt).toLocaleString('zh-CN') : '—'
+  // 并发拉取所有组的完整数据（含密码和内容）
+  const fullData = await Promise.all(groups.map(async g => {
+    try {
+      const r = await fetch(`${API_BASE}/groups/${g.code}/full`)
+      return r.ok ? await r.json() : g
+    } catch { return g }
+  }))
+
+  const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  const row = (label, val) =>
+    `<div class="rec-row"><span class="rec-row-label">${label}</span><span class="rec-row-val">${val || '<span class="rec-empty">未填写</span>'}</span></div>`
+
+  function buildCard(d) {
+    if (!d.password) return `
+      <div class="rec-card rec-card--inactive">
+        <div class="rec-card-head">
+          <span class="rec-code">${esc(d.code)}</span>
+          <span class="rec-badge rec-badge--inactive">未激活</span>
+        </div>
+        <div class="rec-inactive-hint">尚未开始填写</div>
+      </div>`
+
+    const p1 = d.phase1 || {}
+    const p2 = d.phase2 || {}
+    const p3 = d.phase3 || {}
+    const qs   = p1.questions || []
+    const sub1 = p2.exhibition || {}
+    const sub2 = Array.isArray(p2.equipment) ? p2.equipment : []
+    const sub3 = p2.extra || {}
+    const resolved = p3.resolved || {}
+    const members = (d.members || []).map(esc).join(' · ') || '—'
+    const updated = d.updatedAt ? new Date(d.updatedAt).toLocaleDateString('zh-CN') : '—'
+
+    const p1html = (p1.route || qs.length)
+      ? qs.map((q,i) => row(`Q${i+1}`, esc(q))).join('') +
+        row('选择线路', esc(p1.route)) +
+        row('携带物品', (p1.items||[]).map(esc).join('、'))
+      : '<div class="rec-empty-phase">— 未填写 —</div>'
+
+    const eqList = sub2.map(eq=>`${esc(eq?.name)}（${esc(eq?.function)}）`).join('<br>')
+    const p2html = (sub1.d1 || sub2.length || sub3.text)
+      ? [sub1.d1,sub1.d2,sub1.d3].map((s,i)=>row(`发现${i+1}`,esc(s))).join('') +
+        (sub2.length ? row('高科技设备', eqList) : '') +
+        row('我还发现', esc(sub3.text)) +
+        row('此刻心情', esc(sub3.mood))
+      : '<div class="rec-empty-phase">— 未填写 —</div>'
+
+    const resolveRows = qs.filter(q=>q?.trim()).map((q,i)=>{
+      const ans = resolved[i]
+      const label = ans==='yes' ? '✅ 解决了' : ans==='no' ? '🤔 还不清楚' : '未作答'
+      return row(esc(q), label)
+    }).join('')
+    const p3html = (p3.reflection || resolveRows)
+      ? resolveRows + row('最大收获', esc(p3.reflection)) + row('整体心情', esc(p3.finalMood))
+      : '<div class="rec-empty-phase">— 未填写 —</div>'
+
     return `
-      <div class="data-item record-item" data-code="${g.code}" style="cursor:pointer">
-        <div class="data-item-main">
-          <div class="data-item-title">
-            ${school}${g.members?.join('、') || '—'}
-            <span style="margin-left:10px;font-size:12px;background:#e8f5e9;color:#2d8a5a;padding:2px 8px;border-radius:20px">${phase}</span>
+      <div class="rec-card">
+        <div class="rec-card-head">
+          <div class="rec-card-head-top">
+            <span class="rec-code">${esc(d.code)}</span>
+            <span class="rec-badge rec-badge--active">已激活</span>
+            <span class="rec-pin-display">🔑 ${esc(d.password)}</span>
           </div>
-          <div class="data-item-meta">
-            <span>小组码：<strong>${g.code}</strong></span>
-            <span style="margin:0 8px">·</span>
-            <span>成员 ${g.members?.length || 0} 人</span>
-            <span style="margin:0 8px">·</span>
-            <span>最后更新：${updated}</span>
+          <div class="rec-school">${esc(d.school) || '—'}</div>
+          <div class="rec-members">${members}<span class="rec-updated">· 更新：${updated}</span></div>
+        </div>
+        <div class="rec-card-body">
+          <div class="rec-phase rec-phase--1">
+            <div class="rec-phase-title">📋 行前准备</div>
+            ${p1html}
+          </div>
+          <div class="rec-phase rec-phase--2">
+            <div class="rec-phase-title">🔍 行中探索</div>
+            ${p2html}
+          </div>
+          <div class="rec-phase rec-phase--3">
+            <div class="rec-phase-title">✏️ 行后总结</div>
+            ${p3html}
           </div>
         </div>
-        <div class="data-item-actions">
-          <button class="btn-view-record" data-code="${g.code}">查看详情</button>
-        </div>
-      </div>
-    `
-  }).join('')
-
-  content.innerHTML = `
-    <div style="margin-bottom:16px;color:#666;font-size:14px">共 ${groups.length} 个小组记录（点击查看详情）</div>
-    <div class="data-list" id="recordList">${items}</div>
-    <div id="recordDetail" style="display:none"></div>
-  `
-
-  content.querySelectorAll('.btn-view-record').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation()
-      showRecordDetail(btn.dataset.code, content)
-    })
-  })
-  content.querySelectorAll('.record-item').forEach(item => {
-    item.addEventListener('click', () => showRecordDetail(item.dataset.code, content))
-  })
-}
-
-async function showRecordDetail(code, content) {
-  let data
-  try {
-    const res = await fetch(`${API_BASE}/groups/${code}/full`)
-    if (!res.ok) throw new Error('fetch failed')
-    data = await res.json()
-  } catch (_) {
-    alert('加载详情失败，请重试。')
-    return
+      </div>`
   }
 
-  const d = data
-  const esc = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  const PER = 3
+  let page = 0
+  const total = fullData.length
+  const maxPage = Math.ceil(total / PER) - 1
 
-  const phase1 = d.phase1 || {}
-  const phase2 = d.phase2 || {}
-  const phase3 = d.phase3 || {}
-
-  const sub1 = phase2.exhibition || {}
-  const sub2 = phase2.equipment  || []
-  const sub3 = phase2.extra      || {}
-
-  const checklist = (phase1.items || []).join('、') || '—'
-  const route = phase1.route || '—'
-
-  // 行前问题（存在 questions 数组）
-  const qs = phase1.questions || []
-  const q1 = esc(qs[0]) || '—'
-  const q2 = esc(qs[1]) || '—'
-  const q3 = esc(qs[2]) || '—'
-
-  // 行中·展厅（sub1 = phase2.exhibition）
-  const finds = [sub1.d1, sub1.d2, sub1.d3].map(s => esc(s) || '—')
-  const secretCount = sub1.count || '—'
-
-  // 行中·车间（sub2 = phase2.equipment，数组）
-  const equipArr = Array.isArray(sub2) ? sub2 : []
-  const equips = equipArr.map(eq =>
-    `<tr><td style="padding:6px 12px;border:1px solid #eee">${esc(eq?.name) || '—'}</td><td style="padding:6px 12px;border:1px solid #eee">${esc(eq?.function) || '—'}</td></tr>`
-  ).join('') || '<tr><td colspan="2" style="padding:6px 12px;color:#aaa">未填写</td></tr>'
-
-  // 行中·其他（sub3 = phase2.extra）
-  const freeFind = esc(sub3.text) || '—'
-  const mood2 = sub3.mood || '—'
-
-  // 行后（resolved 是对象 {0:'yes',1:'no'…}，questions 来自 phase1）
-  const p3qs = (phase1.questions || []).filter(q => q?.trim())
-  const resolved = phase3.resolved || {}
-  const resolve = p3qs.length
-    ? p3qs.map((q, i) => {
-        const ans = resolved[i]
-        const label = ans === 'yes' ? '✅ 解决了' : ans === 'no' ? '🤔 还不清楚' : '未作答'
-        return `<div style="margin:6px 0;padding:8px 12px;background:#f9f6f0;border-radius:8px">
-          <strong>Q${i+1}：${esc(q)}</strong><br/>${label}
-        </div>`
-      }).join('')
-    : '<p style="color:#aaa">—</p>'
-  const reflection = esc(phase3.reflection) || '—'
-  const mood3 = phase3.finalMood || '—'
-
-  const school = esc(d.school) || '未知学校'
-  const members = (d.members || []).map(esc).join('、') || '—'
-  const updated = d.updatedAt ? new Date(d.updatedAt).toLocaleString('zh-CN') : '—'
-  const pwd = esc(d.password) || '—'
-
-  document.getElementById('recordList').style.display = 'none'
-  const detail = document.getElementById('recordDetail')
-  detail.style.display = 'block'
-  detail.innerHTML = `
-    <div style="margin-bottom:20px">
-      <button id="backToList" style="background:none;border:none;cursor:pointer;color:#2d8a5a;font-size:14px">← 返回列表</button>
-    </div>
-    <div style="background:#fff;border-radius:16px;padding:28px;border:1px solid #e8e3d8">
-      <h2 style="margin:0 0 4px;font-size:20px">${school} · ${members}</h2>
-      <p style="color:#888;font-size:13px;margin:0 0 12px">小组码：${esc(code)} · 最后更新：${updated}</p>
-      <div style="display:inline-flex;align-items:center;gap:12px;background:#fff8e8;border:1px solid #f0d080;border-radius:8px;padding:8px 16px;margin-bottom:20px;font-size:14px">
-        <span>🔑 密码（PIN）：</span>
-        <strong style="font-size:20px;letter-spacing:4px;font-family:monospace;color:#c8963c">${pwd}</strong>
+  content.innerHTML = `
+    <div class="rec-wrapper">
+      <div class="rec-nav">
+        <button class="rec-arrow rec-prev">‹</button>
+        <div class="rec-cards"></div>
+        <button class="rec-arrow rec-next">›</button>
       </div>
+      <div class="rec-pager"></div>
+    </div>`
 
-      <h3 style="color:#e8a020;margin:0 0 12px;font-size:15px">🎒 行前准备</h3>
-      <div style="background:#fffbf2;border-radius:10px;padding:16px;margin-bottom:20px">
-        <p><strong>我们想解决的问题：</strong>${q1}</p>
-        <p><strong>预测参观时间：</strong>${q2}</p>
-        <p><strong>参观路线选择：</strong>${esc(route)}</p>
-        <p><strong>携带物品：</strong>${checklist}</p>
-        <p><strong>关于农业的问题：</strong>${q3}</p>
-      </div>
+  const cardsEl = content.querySelector('.rec-cards')
+  const pagerEl = content.querySelector('.rec-pager')
+  const prevBtn = content.querySelector('.rec-prev')
+  const nextBtn = content.querySelector('.rec-next')
 
-      <h3 style="color:#2d8a5a;margin:0 0 12px;font-size:15px">🔍 行中探索</h3>
-      <div style="background:#f2faf6;border-radius:10px;padding:16px;margin-bottom:20px">
-        <p style="font-weight:600;margin-bottom:8px">展厅探秘（发现了 ${secretCount} 个秘密）</p>
-        <p><strong>发现1：</strong>${finds[0]}</p>
-        <p><strong>发现2：</strong>${finds[1]}</p>
-        <p><strong>发现3：</strong>${finds[2]}</p>
-        <p style="font-weight:600;margin:16px 0 8px">车间高科技</p>
-        <table style="width:100%;border-collapse:collapse;font-size:14px">
-          <thead><tr>
-            <th style="padding:6px 12px;border:1px solid #eee;background:#f5f5f5;text-align:left">设备名称</th>
-            <th style="padding:6px 12px;border:1px solid #eee;background:#f5f5f5;text-align:left">功能/用途</th>
-          </tr></thead>
-          <tbody>${equips}</tbody>
-        </table>
-        <p style="font-weight:600;margin:16px 0 8px">我还发现</p>
-        <p>${freeFind}</p>
-        <p><strong>此刻心情：</strong>${mood2}</p>
-      </div>
+  function renderPage() {
+    const start = page * PER
+    const slice = fullData.slice(start, start + PER)
+    const empties = PER - slice.length
+    cardsEl.innerHTML = slice.map(buildCard).join('') +
+      Array(empties).fill('<div class="rec-card rec-card--placeholder"></div>').join('')
+    prevBtn.disabled = page === 0
+    nextBtn.disabled = page >= maxPage
+    pagerEl.textContent = total > PER
+      ? `第 ${start+1}–${Math.min(start+PER, total)} 组 / 共 ${total} 组`
+      : `共 ${total} 组`
+    if (total <= PER) { prevBtn.style.visibility='hidden'; nextBtn.style.visibility='hidden' }
+  }
 
-      <h3 style="color:#3a7abf;margin:0 0 12px;font-size:15px">💬 行后总结</h3>
-      <div style="background:#f2f6fc;border-radius:10px;padding:16px">
-        <p style="font-weight:600;margin-bottom:8px">问题解答</p>
-        ${resolve}
-        <p style="margin-top:16px"><strong>最大收获：</strong>${reflection}</p>
-        <p><strong>整体心情：</strong>${mood3}</p>
-      </div>
-    </div>
-  `
-
-  document.getElementById('backToList').addEventListener('click', () => {
-    detail.style.display = 'none'
-    document.getElementById('recordList').style.display = 'block'
-  })
+  prevBtn.addEventListener('click', () => { page--; renderPage() })
+  nextBtn.addEventListener('click', () => { page++; renderPage() })
+  renderPage()
 }
+
 
 // ── Modal open ───────────────────────────────────────────
 function openModal(id) {
