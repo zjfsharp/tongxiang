@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>管理面板 — 桐乡研学</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/admin/admin.css" />
+</head>
+<body>
+
+  <!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+    <div class="login-card">
+      <div class="login-logo">
+        <span class="logo-mark">桐</span>
+        <span>管理后台</span>
+      </div>
+      <p class="login-desc">桐乡研学 · 内容管理系统</p>
+      <div class="login-form">
+        <label class="login-label">访问密码</label>
+        <input class="login-input" type="password" id="pwInput"
+               placeholder="请输入密码" autocomplete="current-password" />
+        <p class="login-error" id="loginError">密码错误，请重试</p>
+        <button class="login-btn" id="loginBtn">进入管理后台</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Admin App -->
+  <div class="admin-app" id="adminApp" style="display:none">
+    <aside class="admin-sidebar">
+      <div class="sidebar-logo">
+        <a href="/" class="logo-mark">桐</a>
+        <span>桐乡研学</span>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" data-section="routes">
+          <span class="nav-icon">🗺️</span> 线路管理
+        </a>
+        <a class="nav-item" data-section="courses">
+          <span class="nav-icon">📚</span> 课程管理
+        </a>
+        <a class="nav-item" data-section="inheritors">
+          <span class="nav-icon">👤</span> 传承人管理
+        </a>
+        <a class="nav-item" data-section="tasks">
+          <span class="nav-icon">✅</span> 任务管理
+        </a>
+        <a class="nav-item" data-section="submissions">
+          <span class="nav-icon">📬</span> 报名记录
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <button class="reset-btn" id="resetAll">清除所有覆盖</button>
+        <a href="/" class="preview-link">← 查看前台</a>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <div class="admin-header">
+        <h1 class="admin-title" id="sectionTitle">线路管理</h1>
+        <div class="admin-actions">
+          <button class="btn-export" id="exportBtn">导出 JSON</button>
+          <button class="btn-add" id="addBtn">+ 添加</button>
+        </div>
+      </div>
+
+      <div class="admin-content" id="adminContent">
+        <!-- Dynamic content rendered by JS -->
+      </div>
+    </main>
+  </div>
+
+  <!-- Edit Modal -->
+  <div class="modal-overlay" id="modalOverlay" style="display:none">
+    <div class="modal" id="editModal">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalTitle">编辑</h2>
+        <button class="modal-close" id="modalClose">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer">
+        <button class="btn-cancel" id="modalCancel">取消</button>
+        <button class="btn-save" id="modalSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="/admin/admin.js"></script>
+</body>
+</html>

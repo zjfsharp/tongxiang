@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="桐乡研学之旅 — 探索江南水乡的非遗文化与自然之美，为中小学生提供丰富的研学资源与体验" />
+  <title>桐乡研学之旅</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+
+  <!-- ═══════════════════ NAV ═══════════════════ -->
+  <nav class="nav" role="navigation" aria-label="主导航">
+    <a href="#" class="nav-logo">
+      <span class="logo-mark">桐</span>
+      桐乡研学
+    </a>
+    <div class="nav-links">
+      <a href="#resources">研学资源</a>
+      <a href="#inheritors">非遗传承</a>
+      <a href="#tasks">研学任务</a>
+      <a href="#tasks" class="nav-cta">立即报名</a>
+    </div>
+    <button class="nav-hamburger" aria-label="菜单" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile drawer -->
+  <div class="nav-drawer" role="dialog" aria-label="导航菜单">
+    <a href="#resources">研学资源</a>
+    <a href="#inheritors">非遗传承</a>
+    <a href="#tasks">研学任务</a>
+    <a href="#tasks" class="nav-cta" style="text-align:center;margin-top:8px">立即报名</a>
+  </div>
+
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section class="hero" aria-label="首屏">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content container">
+      <p class="hero-eyebrow">浙江 · 桐乡 · 濮院</p>
+      <h1 class="hero-title">
+        桐乡<br /><em>研学之旅</em>
+      </h1>
+      <p class="hero-subtitle">
+        探索江南水乡的非遗文化与自然之美<br />
+        为中小学生量身打造的沉浸式成长体验
+      </p>
+      <div class="hero-actions">
+        <a href="#resources" class="btn-primary">
+          开始探索
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <a href="#tasks" class="btn-ghost">查看研学任务</a>
+      </div>
+    </div>
+
+    <div class="hero-scroll" aria-hidden="true">
+      <span>滚动探索</span>
+      <div class="scroll-arrow"></div>
+    </div>
+    <div class="hero-dots" role="tablist" aria-label="幻灯片导航"></div>
+  </section>
+
+  <!-- ═══════════════════ STATS ═══════════════════ -->
+  <section class="stats" aria-label="数据总览">
+    <div class="stats-grid">
+      <div class="stat-item anim-fade-up">
+        <div class="stat-num">
+          <span data-counter data-target="29">0</span>
+          <span class="stat-unit">名</span>
+        </div>
+        <div class="stat-label">非遗传承人</div>
+      </div>
+      <div class="stat-item anim-fade-up delay-1">
+        <div class="stat-num">
+          <span data-counter data-target="6">0</span>
+          <span class="stat-unit">条</span>
+        </div>
+        <div class="stat-label">乡村漫游线路</div>
+      </div>
+      <div class="stat-item anim-fade-up delay-2">
+        <div class="stat-num">
+          <span data-counter data-target="3">0</span>
+          <span class="stat-unit">门</span>
+        </div>
+        <div class="stat-label">非遗研学课程</div>
+      </div>
+      <div class="stat-item anim-fade-up delay-3">
+        <div class="stat-num">
+          <span data-counter data-target="8">0</span>
+          <span class="stat-unit">个</span>
+        </div>
+        <div class="stat-label">非遗类别</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ RESOURCES ═══════════════════ -->
+  <section class="resources" id="resources" aria-label="研学资源">
+    <div class="resources-header">
+      <div class="resources-header-left">
+        <p class="section-label anim-slide-left">研学资源</p>
+        <h2 class="section-title anim-slide-left delay-1">
+          探索桐乡的<br />每一种精彩
+        </h2>
+        <p class="section-desc anim-slide-left delay-2">
+          六条特色乡村漫游线路，三门非遗研学课程，
+          带孩子在行走中感受江南水乡的文化积淀。
+        </p>
+      </div>
+      <div class="tab-group anim-fade-in delay-2">
+        <button class="tab-btn active" data-tab="routes">乡村漫游线路</button>
+        <button class="tab-btn" data-tab="courses">非遗研学课程</button>
+      </div>
+    </div>
+
+    <!-- Routes Tab -->
+    <div class="tab-panel active" data-panel="routes">
+      <div class="routes-grid"></div>
+    </div>
+
+    <!-- Courses Tab -->
+    <div class="tab-panel" data-panel="courses">
+      <div class="courses-list"></div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ INHERITORS ═══════════════════ -->
+  <section class="inheritors" id="inheritors" aria-label="非遗传承人">
+    <div class="inheritors-header container">
+      <p class="section-label anim-slide-left" style="color: rgba(200,150,60,0.8)">非遗传承</p>
+      <h2 class="section-title anim-slide-left delay-1">
+        他们守护着<br />桐乡的文化记忆
+      </h2>
+      <p class="section-desc anim-slide-left delay-2">
+        第六批嘉兴市非物质文化遗产代表性传承人，
+        涵盖8个类别27个项目。每一位传承人，
+        都是一部活着的文化史。
+      </p>
+      <div class="category-filters"></div>
+    </div>
+
+    <div class="inheritors-grid container"></div>
+
+    <div class="heritage-stats">
+      <div class="heritage-stat anim-fade-up">
+        <div class="heritage-stat-num">3</div>
+        <div class="heritage-stat-label">国家级传承人</div>
+      </div>
+      <div class="heritage-stat anim-fade-up delay-1">
+        <div class="heritage-stat-num">21</div>
+        <div class="heritage-stat-label">省级传承人</div>
+      </div>
+      <div class="heritage-stat anim-fade-up delay-2">
+        <div class="heritage-stat-num">118</div>
+        <div class="heritage-stat-label">市级传承人</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ TASKS ═══════════════════ -->
+  <section class="tasks" id="tasks" aria-label="研学任务">
+    <div class="tasks-header container">
+      <p class="section-label anim-slide-left">研学任务</p>
+      <h2 class="section-title anim-slide-left delay-1">
+        选择你的<br />研学冒险
+      </h2>
+      <p class="section-desc anim-slide-left delay-2">
+        浏览当前开放的研学任务，提交你的参与意向，
+        我们将为你的班级量身定制最佳体验方案。
+      </p>
+    </div>
+
+    <div class="tasks-layout container">
+      <!-- Left: Task Board -->
+      <div class="tasks-board">
+        <div class="tasks-board-header">
+          <div class="tasks-board-title">当前任务广场</div>
+          <div class="tasks-count"></div>
+        </div>
+        <div class="task-cards"></div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="interest-form-wrap">
+        <div class="interest-form-card">
+          <div class="form-title">提交参与意向</div>
+          <p class="form-subtitle">填写下方信息，我们将在2个工作日内与您取得联系，为您的班级定制专属研学方案。</p>
+
+          <form class="interest-form" novalidate>
+            <div class="form-group">
+              <label class="form-label" for="school">学校名称 *</label>
+              <input class="form-input" id="school" name="school" type="text"
+                     placeholder="如：桐乡市实验小学" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="contact">联系人姓名 *</label>
+              <input class="form-input" id="contact" name="contact" type="text"
+                     placeholder="老师姓名" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="phone">联系电话 *</label>
+              <input class="form-input" id="phone" name="phone" type="tel"
+                     placeholder="请输入手机号" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="grade">年级</label>
+              <select class="form-select" id="grade" name="grade">
+                <option value="">请选择年级</option>
+                <option>一年级</option><option>二年级</option>
+                <option>三年级</option><option>四年级</option>
+                <option>五年级</option><option>六年级</option>
+                <option>初一</option><option>初二</option><option>初三</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="headcount">预计人数</label>
+              <input class="form-input" id="headcount" name="headcount" type="number"
+                     min="10" max="200" placeholder="如：45" />
+            </div>
+            <div class="form-group">
+              <label class="form-label">感兴趣的线路（可多选）</label>
+              <div class="checkbox-group routes-checkbox-group"></div>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="date">期望时间</label>
+              <input class="form-input" id="date" name="date" type="date"
+                     min="2026-04-01" />
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="remarks">补充说明</label>
+              <textarea class="form-textarea" id="remarks" name="remarks"
+                        placeholder="特殊需求、希望侧重的主题等..."></textarea>
+            </div>
+            <button type="submit" class="form-submit">提交意向 →</button>
+          </form>
+
+          <div class="form-success">
+            <div class="form-success-icon">🎉</div>
+            <div class="form-success-title">收到！我们将尽快联系您</div>
+            <p class="form-success-desc">感谢您的参与意向，桐乡研学团队将在2个工作日内与您联系，为您量身定制最棒的研学体验。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="footer" aria-label="页脚">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo">
+          <span class="logo-mark">桐</span>
+          桐乡研学之旅
+        </div>
+        <p>探索江南水乡的非遗文化与自然之美，为中小学生提供沉浸式研学体验，让文化在行走中传承。</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">快速导航</div>
+        <ul class="footer-links">
+          <li><a href="#resources">研学资源</a></li>
+          <li><a href="#resources">乡村漫游线路</a></li>
+          <li><a href="#resources">非遗研学课程</a></li>
+          <li><a href="#inheritors">非遗传承人</a></li>
+          <li><a href="#tasks">研学任务</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">合作机构</div>
+        <ul class="footer-links">
+          <li><a href="#">浙江传媒学院桐乡研究院</a></li>
+          <li><a href="#">浙江省旅游发展研究中心</a></li>
+          <li><a href="#">濮院镇文化旅游局</a></li>
+          <li><a href="#">桐乡市非遗保护中心</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">联系我们</div>
+        <ul class="footer-links">
+          <li><a href="#">桐乡市，浙江省</a></li>
+          <li><a href="#">濮院镇文化旅游局</a></li>
+          <li><a href="#tasks">在线报名咨询</a></li>
+          <li><a href="/admin.html" style="color:rgba(255,255,255,0.2);font-size:11px">管理后台</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 桐乡研学之旅. 本站内容仅供参考。</span>
+      <span>数据来源：桐乡发布 · 风雅桐乡</span>
+    </div>
+  </footer>
+
+</body>
+</html>

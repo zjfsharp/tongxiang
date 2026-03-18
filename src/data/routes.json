@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    "name": "田园牧歌研学线",
+    "subtitle": "稻香葡语·田野课堂",
+    "description": "3公里半径内形成农业研学闭环，农田到餐桌的完整体验链",
+    "audience": ["亲子家庭", "研学团队", "学生党"],
+    "image": "/images/routes/scene1.jpg",
+    "poem": "葡藤千亩梁秋色，鲜果凝露萃晨光。\n稻浪满目绘阡陌，单车载满野咖香。",
+    "poemTitle": "漠田诗行",
+    "color": "#6b8c3e",
+    "stops": [
+      { "name": "千亩葡萄", "activities": ["生态采摘", "品鉴", "种植科普"] },
+      { "name": "蕾蕾家庭农场", "activities": ["应季果蔬采摘", "果蔬鲜萃"] },
+      { "name": "裤子湾农庄", "activities": ["生态午餐", "咖啡休憩"] },
+      { "name": "喜漾农耕园", "activities": ["稻米研学", "艺术稻田打卡", "绿道骑行"] }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "古镇雅集文化线",
+    "subtitle": "运河商脉·禅意栖居",
+    "description": "古镇与禅寺步行可达，文化场景自然过渡",
+    "audience": ["文化爱好者", "摄影群体"],
+    "image": "/images/routes/scene2.jpg",
+    "poem": "古桥商运泊晨光，禅寺拈香影入窗。\n工坊钱纹镀诗去，半床星月压条凉。",
+    "poemTitle": "水乡商禅录",
+    "color": "#7a5c3e",
+    "stops": [
+      { "name": "濮院时尚古镇", "activities": ["商运文化馆", "水乡建筑摄影"] },
+      { "name": "香海禅寺", "activities": ["禅修体验"] },
+      { "name": "濮院优选·品牌集合店", "activities": ["非遗手作", "购物"] },
+      { "name": "新生集镇", "activities": ["书屋阅读", "茶歇"] },
+      { "name": "原舍·濮院度假酒店", "activities": ["疗愈度假"] }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "绿野仙踪休闲线",
+    "subtitle": "林间逸趣·奢野共生",
+    "description": "土灶烟火与星空疗愈的共生之旅",
+    "audience": ["企业团建", "轻奢度假客群"],
+    "image": "/images/routes/scene3.jpg",
+    "poem": "土灶蟆原炙琉璃，白纱帐里药香沉。\n钓竿惊破菱塘月，万顷松风煮星尘。",
+    "poemTitle": "野奢十二时辰",
+    "color": "#2d5a3d",
+    "stops": [
+      { "name": "簿客农庄", "activities": ["土灶体验", "烤全羊"] },
+      { "name": "原舍·濮院度假酒店", "activities": ["疗愈SPA"] },
+      { "name": "裤子湾农庄", "activities": ["垂钓比赛", "苗木花艺课"] },
+      { "name": "杉 Restaurant & bar", "activities": ["杉林氧吧", "星空派对"] }
+    ]
+  },
+  {
+    "id": 4,
+    "name": "烟火寻味美食线",
+    "subtitle": "拾味乡野间·酿得半日闲",
+    "description": "从「舌尖」到「指尖」的沉浸式乡旅，以轻劳动串联乡愁记忆",
+    "audience": ["美食爱好者", "亲子家庭", "闺蜜聚会"],
+    "image": "/images/routes/scene4.jpg",
+    "poem": "姑嫂饼香晨露新，柴火野米正炊烟。\n莓酱初凝葡满涩，半月偷来仅童年。",
+    "poemTitle": "农趣一日",
+    "color": "#8c4a2f",
+    "stops": [
+      { "name": "新生集镇", "activities": ["姑嫂饼作坊体验", "羊肉面早茶"] },
+      { "name": "簿客农庄", "activities": ["柴火野米饭"] },
+      { "name": "蕾蕾家庭农场", "activities": ["采摘", "果酱制作"] },
+      { "name": "千亩葡萄园", "activities": ["采摘", "DIY葡萄甜品", "气泡饮"] }
+    ]
+  },
+  {
+    "id": 5,
+    "name": "沃野稻香农耕线",
+    "subtitle": "稻香葡影·星飨田园",
+    "description": "从稻田迷宫到星空晚宴的全感官田园之旅",
+    "audience": ["亲子家庭", "自然教育爱好者", "美食体验派"],
+    "image": "/images/routes/scene5.jpg",
+    "poem": "稻浪迷踪晓露香，葡园剪绿午风凉。\n杉林星宴斟秋色，一日耕读醉夕阳。",
+    "poemTitle": "耕野行吟",
+    "color": "#c8963c",
+    "stops": [
+      { "name": "喜漾农耕园", "activities": ["稻米研学", "稻田迷宫"] },
+      { "name": "新生集镇", "activities": ["午餐推荐羊肉面", "定胜糕"] },
+      { "name": "千亩葡萄", "activities": ["种植体验", "科普课堂"] },
+      { "name": "蕾蕾家庭农场", "activities": ["有机果蔬采摘"] },
+      { "name": "杉 Restaurant & bar", "activities": ["主题料理", "星空茶歌"] }
+    ]
+  },
+  {
+    "id": 6,
+    "name": "禅意疗愈养生线",
+    "subtitle": "禅心沿岸·野趣归真",
+    "description": "蕉颐精神与味蕾修养，专业疗愈项目与自然野趣的创意结合",
+    "audience": ["上班族", "学生减压人群"],
+    "image": "/images/routes/scene6.jpg",
+    "poem": "晨钟墨禅香海静，午钵茶烟素心清。\n一篙云水惊白鹭，半岭松风宴火明。",
+    "poemTitle": "濮院一日禅",
+    "color": "#4a6b8c",
+    "stops": [
+      { "name": "香海禅寺", "activities": ["禅修", "抄经"] },
+      { "name": "原舍·濮院度假酒店", "activities": ["素斋午餐", "颂钵冥想", "品茗小憩"] },
+      { "name": "裤子湾农庄", "activities": ["湿地泛舟", "森林康养"] },
+      { "name": "簿客农庄", "activities": ["农家土菜", "烤全羊"] }
+    ]
+  }
+]

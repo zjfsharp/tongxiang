@@ -1,0 +1,263 @@
+[
+  {
+    "id": 1,
+    "name": "陆娟华",
+    "category": "民间文学",
+    "project": "桐乡蚕歌",
+    "level": "市级",
+    "description": "传承桐乡蚕桑文化中的民间歌谣，记录蚕农劳作与生活的诗意表达",
+    "emoji": "📜"
+  },
+  {
+    "id": 2,
+    "name": "顾如芳",
+    "category": "传统舞蹈",
+    "project": "桐乡拜香凳",
+    "level": "市级",
+    "description": "传承具有江南特色的民间仪式舞蹈，融合信仰与艺术的传统表演形式",
+    "emoji": "💃"
+  },
+  {
+    "id": 3,
+    "name": "董翠娟",
+    "category": "传统戏剧",
+    "project": "花鼓戏",
+    "level": "市级",
+    "description": "传承江南花鼓戏表演艺术，保留民间戏曲的原汁原味",
+    "emoji": "🎭"
+  },
+  {
+    "id": 4,
+    "name": "吕建灿",
+    "category": "传统戏剧",
+    "project": "桐乡皮影戏",
+    "level": "市级",
+    "description": "以灯光与皮革雕刻呈现桐乡特色皮影故事，光影之间演绎百年民间文化",
+    "emoji": "🎭"
+  },
+  {
+    "id": 5,
+    "name": "沈娟英",
+    "category": "曲艺",
+    "project": "三跳",
+    "level": "市级",
+    "description": "桐乡特有曲艺形式，说唱结合，以三根竹板敲击节奏，讲述民间故事",
+    "emoji": "🎵"
+  },
+  {
+    "id": 6,
+    "name": "沈伟国",
+    "category": "传统美术",
+    "project": "嘉兴灶头画",
+    "level": "市级",
+    "description": "在农家灶台上绘制的民俗彩画，承载着江南农村的生活信仰与审美",
+    "emoji": "🎨"
+  },
+  {
+    "id": 7,
+    "name": "张良华",
+    "category": "传统美术",
+    "project": "嘉兴灶头画",
+    "level": "市级",
+    "description": "继承灶头画技艺，将传统民俗图案与现代审美相融合",
+    "emoji": "🎨"
+  },
+  {
+    "id": 8,
+    "name": "虞燕燕",
+    "category": "传统美术",
+    "project": "手工彩色捧花",
+    "level": "市级",
+    "description": "以蚕丝为材料制作的传统捧花艺术，色彩鲜艳，工艺精细",
+    "emoji": "💐"
+  },
+  {
+    "id": 9,
+    "name": "王美芳",
+    "category": "传统美术",
+    "project": "剧墨纱灯",
+    "level": "市级",
+    "description": "以薄纱为灯罩、墨笔绘戏剧人物的传统纱灯工艺，光影流转间尽显江南风雅",
+    "emoji": "🏮"
+  },
+  {
+    "id": 10,
+    "name": "钟小燕",
+    "category": "传统美术",
+    "project": "桐乡竹刻",
+    "level": "市级",
+    "description": "以竹为纸，刀为笔，刻写桐乡山水与人文的精妙竹刻艺术",
+    "emoji": "🎋"
+  },
+  {
+    "id": 11,
+    "name": "朱惠坤",
+    "category": "传统美术",
+    "project": "桐乡灰塑",
+    "level": "市级",
+    "description": "以石灰为材料的传统建筑装饰艺术，在墙头屋脊上呈现吉祥图案",
+    "emoji": "🏛️"
+  },
+  {
+    "id": 12,
+    "name": "周惠兴",
+    "category": "传统美术",
+    "project": "丝绸画绩",
+    "level": "市级",
+    "description": "以丝绸为画布的传统绘画工艺，融合纺织与绘画艺术",
+    "emoji": "🖼️"
+  },
+  {
+    "id": 13,
+    "name": "郭飞燕",
+    "category": "传统美术",
+    "project": "藤编",
+    "level": "市级",
+    "description": "以藤条编织日用器物与装饰品，自然材料中蕴含的匠人智慧",
+    "emoji": "🧺"
+  },
+  {
+    "id": 14,
+    "name": "胡耀飞",
+    "category": "传统技艺",
+    "project": "蓝印花布印染技艺",
+    "level": "市级",
+    "description": "以蓝靛染料与防染糊料制作传统蓝白花布，是江南最具代表性的民间印染艺术",
+    "emoji": "🔵"
+  },
+  {
+    "id": 15,
+    "name": "张建林",
+    "category": "传统技艺",
+    "project": "姑嫂饼制作技艺",
+    "level": "市级",
+    "description": "传承百年的桐乡特色糕饼制作技艺，以姑嫂和谐共处的故事为名",
+    "emoji": "🥮"
+  },
+  {
+    "id": 16,
+    "name": "沈新强",
+    "category": "传统技艺",
+    "project": "高桥糕点制作技艺",
+    "level": "市级",
+    "description": "高桥地区世代相传的传统糕点工艺，保留古法配方与制作方式",
+    "emoji": "🍡"
+  },
+  {
+    "id": 17,
+    "name": "程耀焕",
+    "category": "传统技艺",
+    "project": "桐乡草屋（木结构建筑纠偏）技艺",
+    "level": "市级",
+    "description": "传统木结构建筑修缮与纠偏技艺，守护江南老建筑的历史风貌",
+    "emoji": "🏚️"
+  },
+  {
+    "id": 18,
+    "name": "钱清华",
+    "category": "传统技艺",
+    "project": "「桐乡辣酱」酿造技艺",
+    "level": "市级",
+    "description": "以传统工艺酿造的桐乡特色辣酱，风味独特，承载乡土记忆",
+    "emoji": "🌶️"
+  },
+  {
+    "id": 19,
+    "name": "徐振清",
+    "category": "传统技艺",
+    "project": "桐乡传统糕点制作技艺",
+    "level": "市级",
+    "description": "传承桐乡地区各类传统节令糕点的制作工艺与配方",
+    "emoji": "🍰"
+  },
+  {
+    "id": 20,
+    "name": "岳功伟",
+    "category": "传统技艺",
+    "project": "桐乡传统糕点制作技艺",
+    "level": "市级",
+    "description": "守护桐乡糕点文化，将传统工艺与现代食品安全标准相结合",
+    "emoji": "🍰"
+  },
+  {
+    "id": 21,
+    "name": "丁发勇",
+    "category": "传统技艺",
+    "project": "传统家具制作技艺",
+    "level": "市级",
+    "description": "以榫卯结构为核心的江南传统家具制作，无钉无胶，百年不散",
+    "emoji": "🪑"
+  },
+  {
+    "id": 22,
+    "name": "莫建德",
+    "category": "传统技艺",
+    "project": "鱼圆制作技艺",
+    "level": "市级",
+    "description": "桐乡水乡特色美食鱼圆的传统制作技艺，新鲜食材手工捶打，软嫩弹牙",
+    "emoji": "🐟"
+  },
+  {
+    "id": 23,
+    "name": "庄卫荣",
+    "category": "传统技艺",
+    "project": "桐乡臭干制作技艺",
+    "level": "市级",
+    "description": "以传统发酵工艺制作的桐乡特色臭干，独特风味成为游客必尝的地方小吃",
+    "emoji": "🫙"
+  },
+  {
+    "id": 24,
+    "name": "郭子良",
+    "category": "传统技艺",
+    "project": "豆制品制作技艺",
+    "level": "市级",
+    "description": "传承传统豆腐、豆干等豆制品手工制作技艺，保留古法工序与本地风味",
+    "emoji": "🫘"
+  },
+  {
+    "id": 25,
+    "name": "费春祥",
+    "category": "传统技艺",
+    "project": "书画装裱工艺",
+    "level": "市级",
+    "description": "以传统装裱技艺为书画作品护航，使艺术品得以代代流传",
+    "emoji": "📜"
+  },
+  {
+    "id": 26,
+    "name": "沈之嵑",
+    "category": "传统医药",
+    "project": "金氏中医内科",
+    "level": "市级",
+    "description": "桐乡金氏家族世代相传的中医内科诊疗技艺，融合地方草药与经典方剂",
+    "emoji": "🌿"
+  },
+  {
+    "id": 27,
+    "name": "凌宽",
+    "category": "传统医药",
+    "project": "凌氏针灸",
+    "level": "市级",
+    "description": "传承凌氏针灸独特手法，以精准取穴与独特行针技艺著称于桐乡地区",
+    "emoji": "🪡"
+  },
+  {
+    "id": 28,
+    "name": "沈伟青",
+    "category": "民俗",
+    "project": "双庙渚蚕花水会",
+    "level": "市级",
+    "description": "桐乡最具特色的蚕乡民俗活动，在水上举行祈蚕丰收的传统水会仪式",
+    "emoji": "🎊"
+  },
+  {
+    "id": 29,
+    "name": "钟春雨",
+    "category": "民俗",
+    "project": "蜘蛛煨蛋习俗",
+    "level": "市级",
+    "description": "桐乡独特的蚕乡民俗，以蜘蛛织网预测蚕年丰歉的传统习俗",
+    "emoji": "🕷️"
+  }
+]
