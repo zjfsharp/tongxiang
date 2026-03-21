@@ -1,0 +1,394 @@
+[
+  {
+    "id": 1,
+    "title": "石门湾研学记录",
+    "description": "走进石门湾现代农事服务中心，探索从一粒种子到一碗米饭的全过程。",
+    "grade": "三至六年级",
+    "gradeRange": [
+      3,
+      6
+    ],
+    "location": "石门湾现代农事服务中心",
+    "duration": "一天",
+    "capacity": 40,
+    "enrolled": 0,
+    "status": "招募中",
+    "difficulty": "初级",
+    "tags": [
+      "现代农业",
+      "稻米文化",
+      "科技探索"
+    ],
+    "startDate": "2026-04-15",
+    "organizer": "桐乡研学",
+    "journalEnabled": true,
+    "isDefault": true,
+    "phases": {
+      "before": {
+        "mode": "form",
+        "title": "行前准备",
+        "icon": "🎒",
+        "sections": [
+          {
+            "id": "questions_section",
+            "targetKey": null,
+            "title": "💡 最想弄清楚的问题（最多3个）",
+            "hint": "出发前先想好，回来再看看有没有答案",
+            "fields": [
+              {
+                "id": "questions",
+                "type": "repeating_text",
+                "count": 3,
+                "placeholders": [
+                  "你们最想弄清楚什么？",
+                  "还有别的问题吗？",
+                  "第三个问题（选填）"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "items_section",
+            "targetKey": null,
+            "title": "🎒 要带的东西",
+            "fields": [
+              {
+                "id": "items",
+                "type": "checklist",
+                "hasOther": true,
+                "options": [
+                  "📓 笔记本",
+                  "✏️ 铅笔/彩笔",
+                  "💧 水杯",
+                  "📸 相机/手机",
+                  "🌂 雨具（天气不好时）",
+                  "🎒 背包"
+                ]
+              }
+            ]
+          },
+          {
+            "id": "route_section",
+            "targetKey": null,
+            "title": "🗺️ 我们想走什么路线？",
+            "fields": [
+              {
+                "id": "route",
+                "type": "radio",
+                "options": [
+                  "先参观展厅，再参观生产车间",
+                  "先参观生产车间，再参观展厅",
+                  "跟着老师的安排走"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "during": {
+        "mode": "form",
+        "title": "行中探索",
+        "icon": "🔍",
+        "subPhases": [
+          {
+            "n": 1,
+            "icon": "🏛️",
+            "title": "展厅探秘",
+            "doneKey": "sub1Done",
+            "sections": [
+              {
+                "id": "exhibition",
+                "targetKey": "exhibition",
+                "hint": "展厅里藏着许多小秘密，写下你发现的信息！",
+                "fields": [
+                  {
+                    "id": "d1",
+                    "type": "textarea",
+                    "label": "📍 关于这里的地理位置和区域分布",
+                    "placeholder": "你在地图上发现了什么？",
+                    "rows": 3
+                  },
+                  {
+                    "id": "d2",
+                    "type": "textarea",
+                    "label": "🤖 传统农业 vs 现代农业有哪些不同？",
+                    "placeholder": "比如无人机喷药、直播卖米…",
+                    "rows": 3
+                  },
+                  {
+                    "id": "d3",
+                    "type": "textarea",
+                    "label": "🍚 大米有哪些不同的产品形式？",
+                    "placeholder": "你看到了哪些大米的包装或产品？",
+                    "rows": 3
+                  },
+                  {
+                    "id": "count",
+                    "type": "number",
+                    "label": "我一共发现了___个秘密！",
+                    "placeholder": "?"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "n": 2,
+            "icon": "⚙️",
+            "title": "车间高科技",
+            "doneKey": "sub2Done",
+            "sections": [
+              {
+                "id": "equipment_section",
+                "targetKey": null,
+                "hint": "稻米生产车间里有哪些高新科技？记录下来！",
+                "fields": [
+                  {
+                    "id": "equipment",
+                    "type": "table",
+                    "rows": 4,
+                    "rowLabel": "设备",
+                    "columns": [
+                      {
+                        "id": "name",
+                        "label": "名称",
+                        "placeholder": "名称"
+                      },
+                      {
+                        "id": "function",
+                        "label": "它的作用是…",
+                        "placeholder": "它的作用是…"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "n": 3,
+            "icon": "💡",
+            "title": "我还发现…",
+            "doneKey": "sub3Done",
+            "isLast": true,
+            "sections": [
+              {
+                "id": "extra",
+                "targetKey": "extra",
+                "hint": "你还发现了什么特别有趣的事情？自由记录！",
+                "fields": [
+                  {
+                    "id": "text",
+                    "type": "textarea",
+                    "placeholder": "写下任何你觉得有意思的发现，比如机器的声音、米的颜色、工人叔叔做的事…",
+                    "rows": 6
+                  },
+                  {
+                    "id": "mood",
+                    "type": "emoji_picker",
+                    "label": "此刻心情",
+                    "options": [
+                      "😮",
+                      "😊",
+                      "🤔",
+                      "😎",
+                      "🤩",
+                      "😄"
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "after": {
+        "mode": "form",
+        "title": "行后总结",
+        "icon": "💬",
+        "sections": [
+          {
+            "id": "resolved_section",
+            "targetKey": null,
+            "title": "🔄 行前的问题，现在有答案了吗？",
+            "fields": [
+              {
+                "id": "resolved",
+                "type": "question_resolve",
+                "sourcePhase": "before",
+                "sourceField": "questions"
+              }
+            ]
+          },
+          {
+            "id": "reflection_section",
+            "targetKey": null,
+            "title": "📝 我的研学感想",
+            "fields": [
+              {
+                "id": "reflection",
+                "type": "textarea",
+                "rows": 6,
+                "placeholder": "写下这次研学最让你印象深刻的事，学到了什么，有什么想说的…"
+              }
+            ]
+          },
+          {
+            "id": "finalMood_section",
+            "targetKey": null,
+            "title": "这次研学我的总体感受",
+            "fields": [
+              {
+                "id": "finalMood",
+                "type": "emoji_picker",
+                "options": [
+                  "😊",
+                  "🤩",
+                  "😄",
+                  "🤔",
+                  "😮",
+                  "💪"
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  {
+    "id": 2,
+    "title": "乌镇STEAM科创基地",
+    "grade": "三年级",
+    "location": "乌镇STEAM科创基地-位于乌镇镇",
+    "duration": "半天",
+    "capacity": 40,
+    "status": "招募中",
+    "difficulty": "初级",
+    "description": "当千年乌镇的人文底蕴碰撞STEAM科创的实践魅力，一场以动手创造、项目实践为核心的研学之旅，正成为春季学子们的全新选择。\n\n作为桐乡市科创科普集聚区核心阵地，这里告别\"单向听讲\"的传统模式，让孩子化身\"小小工程师\"，在亲手实践中解锁科创思维，在团队协作中锻造创新能力，让孩子的成长，从一场沉浸式科创探索开始！",
+    "journalEnabled": true,
+    "tags": [],
+    "organizer": "桐乡市茅盾实验小学现代校区",
+    "startDate": "2026-04-05",
+    "phases": {
+      "before": {
+        "mode": "form",
+        "title": "行前准备",
+        "icon": "🎒",
+        "sections": [
+          {
+            "id": "sec_1774109011250",
+            "targetKey": null,
+            "title": "你最想弄清楚的三个问题是什么？",
+            "hint": "出发前先想好，回来再看看有没有答案",
+            "fields": [
+              {
+                "id": "f_1774110292457",
+                "type": "repeating_text",
+                "label": "",
+                "placeholder": "",
+                "rows": 3,
+                "count": 3,
+                "placeholders": []
+              }
+            ]
+          },
+          {
+            "id": "sec_1774110329201",
+            "targetKey": null,
+            "title": "🎒 要带的东西",
+            "hint": "",
+            "fields": [
+              {
+                "id": "f_1774110334414",
+                "type": "checklist",
+                "label": "",
+                "placeholder": "",
+                "rows": 3,
+                "options": [
+                  "📓 笔记本",
+                  "✏️ 铅笔/彩笔",
+                  "💧 水杯",
+                  "📸 相机/手机"
+                ],
+                "hasOther": true
+              }
+            ]
+          },
+          {
+            "id": "sec_1774110354690",
+            "targetKey": null,
+            "title": "🗺️ 我们想走什么路线？",
+            "hint": "",
+            "fields": [
+              {
+                "id": "f_1774110361173",
+                "type": "radio",
+                "label": "",
+                "placeholder": "",
+                "rows": 3,
+                "options": [
+                  "先参观展厅，再参观生产车间1",
+                  "先参观生产车间，再参观展厅2",
+                  "跟着老师的安排走3"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "during": {
+        "mode": "form",
+        "title": "行中探索",
+        "icon": "🔍",
+        "subPhases": [
+          {
+            "n": 1,
+            "icon": "📝",
+            "title": "科创研学分类学堂",
+            "doneKey": "sub1Done",
+            "isLast": true,
+            "sections": [
+              {
+                "id": "sec_1774109062736",
+                "targetKey": null,
+                "hint": "输入不同的科研创新类别",
+                "fields": [
+                  {
+                    "id": "f_1774110390843",
+                    "type": "textarea",
+                    "label": "📍 关于这里的地理位置和区域分布111",
+                    "placeholder": "你在地图上发现了什么？1111",
+                    "rows": 3
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "after": {
+        "mode": "form",
+        "title": "行后总结",
+        "icon": "💬",
+        "sections": [
+          {
+            "id": "sec_1774109110220",
+            "targetKey": null,
+            "title": "设计了什么作品",
+            "hint": "",
+            "fields": [
+              {
+                "id": "f_1774110435597",
+                "type": "question_resolve",
+                "label": "",
+                "placeholder": "",
+                "rows": 3
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+]

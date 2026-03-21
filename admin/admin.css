@@ -147,12 +147,15 @@ body { font-family: 'Inter', 'PingFang SC', system-ui, sans-serif; background: #
 .data-item-title { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
 .data-item-meta { font-size: 12px; color: #888; }
 .data-item-actions { display: flex; gap: 8px; }
-.btn-edit, .btn-delete {
+.btn-edit, .btn-phase-edit, .btn-delete {
   padding: 6px 14px; font-size: 12px; font-weight: 500;
   border-radius: 6px; cursor: pointer; transition: all 0.2s;
+  font-family: inherit;
 }
 .btn-edit { border: 1px solid #e2e2e2; background: none; }
 .btn-edit:hover { border-color: #c8963c; color: #c8963c; }
+.btn-phase-edit { border: 1px solid #c3dac8; background: none; color: #1e6b44; }
+.btn-phase-edit:hover { background: #eaf5ef; border-color: #1e6b44; }
 .btn-delete { border: 1px solid #fce4ec; background: none; color: #e53935; }
 .btn-delete:hover { background: #fce4ec; }
 
@@ -184,8 +187,16 @@ body { font-family: 'Inter', 'PingFang SC', system-ui, sans-serif; background: #
   border-bottom: 1px solid #f0f0e8;
 }
 .modal-title { font-family: 'Noto Serif SC', serif; font-size: 18px; font-weight: 700; }
-.modal-close { font-size: 18px; color: #aaa; cursor: pointer; padding: 4px 8px; }
-.modal-close:hover { color: #333; }
+.modal-close {
+  width: 32px; height: 32px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; line-height: 1;
+  color: #888; background: none;
+  border: 1px solid #e2e2e2; border-radius: 8px;
+  cursor: pointer; transition: all 0.15s;
+  flex-shrink: 0;
+}
+.modal-close:hover { background: #f5f2ec; color: #333; border-color: #ccc; }
 .modal-body { padding: 24px 28px; overflow-y: auto; flex: 1; display: flex; flex-direction: column; gap: 16px; }
 .modal-footer {
   padding: 16px 28px 24px;
@@ -262,3 +273,315 @@ body { font-family: 'Inter', 'PingFang SC', system-ui, sans-serif; background: #
 .rec-empty-phase { color: #ccc; font-size: 12px; text-align: center; padding: 8px 0; }
 .rec-inactive-hint { padding: 40px 16px; text-align: center; color: #bbb; font-size: 13px; }
 .rec-pager { text-align: center; font-size: 13px; color: #999; }
+
+/* ── Phase editor overlay ──────────────────────────────── */
+.phase-editor-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.phase-editor {
+  background: #fff;
+  border-radius: 14px;
+  width: min(900px, 96vw);
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0,0,0,.25);
+}
+.phase-editor-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  background: #1e3d2f;
+  color: #fff;
+  flex-shrink: 0;
+}
+.phase-editor-header h2 { font-size: 16px; font-weight: 600; margin: 0; }
+.phase-editor-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #e8e4dc;
+  flex-shrink: 0;
+  background: #faf8f4;
+}
+.pe-tab {
+  padding: 12px 24px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-size: 14px;
+  cursor: pointer;
+  color: #888;
+  margin-bottom: -2px;
+}
+.pe-tab.active { color: #1e3d2f; border-bottom-color: #1e3d2f; font-weight: 600; }
+.phase-editor-body { flex: 1; overflow-y: auto; background: #fff; }
+.phase-editor-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 14px 24px;
+  border-top: 1px solid #e8e4dc;
+  flex-shrink: 0;
+}
+.pe-section-card {
+  background: #faf8f4;
+  border: 1.5px solid #e0dbd0;
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 10px;
+}
+.rec-file-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 4px 0;
+}
+.rec-file-thumb {
+  width: 64px; height: 64px;
+  object-fit: cover;
+  border-radius: 6px;
+  border: 1px solid #e0dbd0;
+}
+.rec-file-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #666;
+  background: #f0ece4;
+  border-radius: 6px;
+  padding: 4px 8px;
+}
+
+/* ── Phase Editor Body ── */
+.pe-body-inner {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pe-mode-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 14px;
+  background: #f5f2ec;
+  border-radius: 8px;
+  border: 1px solid #e0dbd0;
+}
+.pe-mode-label { font-size: 13px; font-weight: 600; color: #555; }
+.pe-mode-opt {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  cursor: pointer;
+  color: #444;
+}
+.pe-upload-hint {
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+  padding: 12px 0 0;
+}
+.pe-empty {
+  text-align: center;
+  color: #aaa;
+  font-size: 13px;
+  padding: 24px 0 8px;
+}
+.pe-add-section-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: none;
+  border: 1.5px dashed #c0bab0;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #666;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  margin-top: 4px;
+}
+.pe-add-section-btn:hover { background: #f5f2ec; border-color: #a0998a; }
+
+/* ── Section / SubPhase Cards ── */
+.pe-sec-card {
+  background: #fdf9f4;
+  border: 1.5px solid #ddd8ce;
+  border-radius: 10px;
+  padding: 12px 14px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pe-sec-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pe-sec-input {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+  flex: 1;
+}
+.pe-sec-input:focus { border-color: #1e3d2f; }
+.pe-del-btn {
+  padding: 4px 8px;
+  background: none;
+  border: 1px solid #e0dbd0;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #999;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s;
+}
+.pe-del-btn:hover { background: #fee; color: #c00; border-color: #fcc; }
+
+/* ── Sub-sections (during subphases) ── */
+.pe-subsec {
+  background: #fff;
+  border: 1px solid #e8e4dc;
+  border-radius: 8px;
+  padding: 10px 12px;
+  margin-top: 4px;
+}
+
+/* ── Fields List ── */
+.pe-fields-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pe-add-field-btn {
+  display: block;
+  width: 100%;
+  padding: 7px;
+  background: none;
+  border: 1px dashed #c8c2b8;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #888;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.15s;
+}
+.pe-add-field-btn:hover { background: #f5f2ec; }
+
+/* ── Field Cards ── */
+.pe-field-card {
+  background: #fff;
+  border: 1px solid #e0dbd0;
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+.pe-field-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.pe-field-type-badge {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1e3d2f;
+  background: #e6f2eb;
+  border-radius: 4px;
+  padding: 2px 7px;
+  flex-shrink: 0;
+}
+.pe-field-edit-btn {
+  margin-left: auto;
+  padding: 3px 10px;
+  background: none;
+  border: 1px solid #c8c2b8;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #555;
+  transition: background 0.15s;
+}
+.pe-field-edit-btn:hover { background: #f5f2ec; }
+.pe-del-field { margin-left: 4px; }
+.pe-field-summary {
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pe-field-editor {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px dashed #e0dbd0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Field Editor Rows ── */
+.pe-fe-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.pe-fe-row label {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+  min-width: 80px;
+  padding-top: 7px;
+  flex-shrink: 0;
+}
+.pe-fi {
+  flex: 1;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+}
+.pe-fi:focus { border-color: #1e3d2f; }
+.pe-fi-ta {
+  min-height: 72px;
+  resize: vertical;
+}
+
+/* ── Type Picker (when adding new field) ── */
+.pe-type-picker {
+  padding: 7px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: inherit;
+  outline: none;
+  background: #fff;
+}
+.pe-type-config { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── Records filter bar ── */
+.rec-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: #faf8f4;
+  border: 1.5px solid #e0dbd0;
+  border-radius: 10px;
+  margin-bottom: 16px;
+}

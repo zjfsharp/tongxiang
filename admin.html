@@ -49,6 +49,9 @@
         <a class="nav-item" data-section="groups">
           <span class="nav-icon">👥</span> 小组管理
         </a>
+        <a class="nav-item" data-section="tasks">
+          <span class="nav-icon">📋</span> 研学任务
+        </a>
         <a class="nav-item" data-section="records">
           <span class="nav-icon">📓</span> 研学记录
         </a>
@@ -85,6 +88,26 @@
       <div class="modal-footer">
         <button class="btn-cancel" id="modalCancel">取消</button>
         <button class="btn-save" id="modalSave">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Phase Editor Overlay -->
+  <div class="phase-editor-overlay" id="phaseEditorOverlay" style="display:none">
+    <div class="phase-editor">
+      <div class="phase-editor-header">
+        <h2 id="phaseEditorTitle">编辑阶段内容</h2>
+        <button class="modal-close" id="phaseEditorClose">✕</button>
+      </div>
+      <div class="phase-editor-tabs">
+        <button class="pe-tab active" data-pe-phase="before">🎒 行前</button>
+        <button class="pe-tab" data-pe-phase="during">🔍 行中</button>
+        <button class="pe-tab" data-pe-phase="after">💬 行后</button>
+      </div>
+      <div class="phase-editor-body" id="phaseEditorBody"></div>
+      <div class="phase-editor-footer">
+        <button class="btn-cancel" id="phaseEditorCancel">取消</button>
+        <button class="btn-save" id="phaseEditorSave">保存任务</button>
       </div>
     </div>
   </div>

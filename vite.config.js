@@ -9,6 +9,10 @@ export default defineConfig({
       '/txyx/api': {
         target: 'http://localhost:3001',
         rewrite: path => path.replace(/^\/txyx\/api/, ''),
+      },
+      '/txyx/uploads': {
+        target: 'http://localhost:3001',
+        rewrite: path => path.replace(/^\/txyx/, ''),
       }
     }
   },

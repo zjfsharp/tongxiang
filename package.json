@@ -7,6 +7,9 @@
     "build": "vite build",
     "preview": "vite preview"
   },
+  "dependencies": {
+    "mammoth": "^1.8.0"
+  },
   "devDependencies": {
     "vite": "^5.0.0"
   }
