@@ -244,6 +244,20 @@ http.createServer(async (req, res) => {
     res.writeHead(204); res.end(); return
   }
 
+  // ── Static file serving: GET /uploads/tasks/:id/:filename
+  const mTaskStatic = route.match(/^\/uploads\/tasks\/(\d+)\/([^/]+)$/)
+  if (req.method === 'GET' && mTaskStatic) {
+    const [, id, filename] = mTaskStatic
+    if (filename.includes('..') || filename.includes('/')) return send(res, 400, { error: 'Invalid filename' })
+    const filepath = path.join(UPLOADS_DIR, 'tasks', id, filename)
+    if (!fs.existsSync(filepath)) return send(res, 404, { error: 'File not found' })
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    res.setHeader('Content-Type', mimeFor(filename))
+    res.writeHead(200)
+    fs.createReadStream(filepath).pipe(res)
+    return
+  }
+
   // ── Static file serving: GET /uploads/groups/:code/:filename
   const mStatic = route.match(/^\/uploads\/groups\/([^/]+)\/([^/]+)$/)
   if (req.method === 'GET' && mStatic) {
@@ -318,6 +332,51 @@ http.createServer(async (req, res) => {
     tasks.splice(idx, 1)
     writeJSON(TASKS_FILE, tasks)
     return send(res, 200, { ok: true })
+  }
+
+  // POST /tasks/:id/images — upload a cover image (base64)
+  const mTaskImgUp = route.match(/^\/tasks\/(\d+)\/images$/)
+  if (req.method === 'POST' && mTaskImgUp) {
+    const id    = parseInt(mTaskImgUp[1])
+    const tasks = readJSON(TASKS_FILE) || DEFAULT_TASKS
+    const idx   = tasks.findIndex(t => t.id === id)
+    if (idx === -1) return send(res, 404, { error: '任务不存在' })
+    const body = await parseBody(req)
+    const { filename, data: b64 } = body
+    if (!filename || !b64) return send(res, 400, { error: '缺少文件数据' })
+    const safeName    = filename.replace(/[^a-zA-Z0-9._\-\u4e00-\u9fff]/g, '_').slice(0, 100)
+    const fileId      = `${Date.now()}_${safeName}`
+    const uploadDir   = path.join(UPLOADS_DIR, 'tasks', String(id))
+    if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true })
+    const base64Data  = b64.replace(/^data:[^;]+;base64,/, '')
+    if (Buffer.byteLength(base64Data, 'base64') > 10 * 1024 * 1024)
+      return send(res, 400, { error: '图片过大，最大 10MB' })
+    fs.writeFileSync(path.join(uploadDir, fileId), Buffer.from(base64Data, 'base64'))
+    const imgUrl = `/txyx/api/uploads/tasks/${id}/${fileId}`
+    if (!tasks[idx].images) tasks[idx].images = []
+    tasks[idx].images.push(imgUrl)
+    writeJSON(TASKS_FILE, tasks)
+    return send(res, 200, { ok: true, url: imgUrl, images: tasks[idx].images })
+  }
+
+  // DELETE /tasks/:id/images/:filename — delete a cover image
+  const mTaskImgDel = route.match(/^\/tasks\/(\d+)\/images\/(.+)$/)
+  if (req.method === 'DELETE' && mTaskImgDel) {
+    const id       = parseInt(mTaskImgDel[1])
+    const filename = decodeURIComponent(mTaskImgDel[2])
+    if (filename.includes('..')) return send(res, 400, { error: 'Invalid filename' })
+    const tasks = readJSON(TASKS_FILE) || DEFAULT_TASKS
+    const idx   = tasks.findIndex(t => t.id === id)
+    if (idx === -1) return send(res, 404, { error: '任务不存在' })
+    // Only delete files from uploads dir (not static public images)
+    if (filename.includes('/uploads/tasks/')) {
+      const base = filename.split('/').pop()
+      const fp   = path.join(UPLOADS_DIR, 'tasks', String(id), base)
+      if (fs.existsSync(fp)) fs.unlinkSync(fp)
+    }
+    tasks[idx].images = (tasks[idx].images || []).filter(u => u !== filename)
+    writeJSON(TASKS_FILE, tasks)
+    return send(res, 200, { ok: true, images: tasks[idx].images })
   }
 
   // ── File upload ───────────────────────────────────────────

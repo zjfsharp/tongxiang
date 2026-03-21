@@ -23,6 +23,46 @@
     "organizer": "桐乡研学",
     "journalEnabled": true,
     "isDefault": true,
+    "images": [
+      "/images/shimen/1.jpg",
+      "/images/shimen/2.jpg",
+      "/images/shimen/3.jpg",
+      "/images/shimen/7.jpg"
+    ],
+    "coverText": {
+      "subtitle": "石门湾现代农事服务中心",
+      "tagline": "一粒稻米的现代旅程",
+      "description": "浙江省五星级农事服务中心，全国首批农民专业合作社示范社。集耕种管收烘销于一体，让孩子们亲眼看见从一粒种子到一碗米饭的全过程。",
+      "highlights": [
+        {
+          "icon": "🌾",
+          "label": "经营面积",
+          "value": "1.5万亩"
+        },
+        {
+          "icon": "🏭",
+          "label": "年服务覆盖",
+          "value": "12.5万亩次"
+        },
+        {
+          "icon": "💰",
+          "label": "固定资产",
+          "value": "逾亿元"
+        },
+        {
+          "icon": "⭐",
+          "label": "荣誉认定",
+          "value": "浙江省五星级"
+        }
+      ],
+      "honors": [
+        "全国首批农民专业合作社示范社",
+        "全国农机合作示范社",
+        "浙江省五星级农事服务中心",
+        "浙江省示范合作社",
+        "国家绿色食品企业主体"
+      ]
+    },
     "phases": {
       "before": {
         "mode": "form",
@@ -389,6 +429,11 @@
           }
         ]
       }
-    }
+    },
+    "images": [
+      "/txyx/api/uploads/tasks/2/1774111582189_1.png",
+      "/txyx/api/uploads/tasks/2/1774111584528_14.png",
+      "/txyx/api/uploads/tasks/2/1774111587688_21.png"
+    ]
   }
 ]

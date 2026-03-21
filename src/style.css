@@ -1278,6 +1278,81 @@ ul { list-style: none; }
 /* .sj-entry removed — entry form now embedded in sj-intro-text */
 .sj-journal { background: var(--bg-alt); padding: 60px 0 var(--section-gap); }
 
+/* ── Multi-task section ── */
+.tasks { background: var(--bg); padding: var(--section-gap) 0; }
+.sj-section-header { margin-bottom: 52px; }
+.sj-loading { text-align: center; padding: 60px 0; color: var(--muted); font-size: 15px; }
+
+/* Unified task card */
+.sj-task-card-wrap { margin-bottom: 32px; }
+.sj-task-card {
+  display: grid;
+  grid-template-columns: 520px 1fr;
+  align-items: stretch;
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(30,61,47,0.05);
+  transition: box-shadow 0.2s;
+}
+.sj-task-card:hover { box-shadow: 0 8px 32px rgba(30,61,47,0.10); }
+.sj-task-card-img {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+}
+.sj-task-card-img--empty {
+  background: var(--bg-alt);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+}
+.sj-task-card-img .sj-carousel-track,
+.sj-task-card-img .sj-carousel-img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+}
+.sj-task-card-body { padding: 36px 40px; }
+.sj-task-card-sub {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.05em;
+  color: var(--accent); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.sj-task-card-title {
+  font-family: var(--font-serif);
+  font-size: 24px; font-weight: 700;
+  color: var(--text);
+  margin-bottom: 12px;
+  line-height: 1.3;
+}
+.sj-task-card-desc {
+  font-size: 14px; color: var(--text-2);
+  line-height: 1.75;
+}
+
+/* Status + meta chips */
+.sj-task-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.sj-status-badge {
+  font-size: 12px; font-weight: 600;
+  padding: 3px 10px; border-radius: 100px;
+}
+.sj-status-badge--green  { background: rgba(45,138,90,0.1);  color: #2d8a5a; }
+.sj-status-badge--red    { background: rgba(158,51,51,0.1);  color: var(--red); }
+.sj-status-badge--amber  { background: rgba(200,150,60,0.1); color: var(--accent); }
+.sj-status-badge--gray   { background: var(--bg-alt); color: var(--muted); }
+.sj-meta-chip {
+  font-size: 12px; color: var(--muted);
+  padding: 3px 10px;
+  background: var(--bg-alt);
+  border-radius: 100px;
+}
+
+@media (max-width: 860px) {
+  .sj-task-card { grid-template-columns: 1fr; }
+  .sj-task-card-img { min-height: 220px; aspect-ratio: 16/9; }
+  .sj-task-card-body { padding: 24px; }
+}
+
 /* ── Intro layout ── */
 .sj-intro-inner {
   display: grid;

@@ -476,9 +476,11 @@ function openTaskModal(id, tasks) {
         <span>启用研学日记（学生在线填表）</span>
       </label>
     </div>
+    ${task ? renderTaskImagesSection(_editingTask) : '<p style="font-size:12px;color:#aaa">保存后可上传封面图片</p>'}
   `
 
   overlay.style.display = 'flex'
+  if (task) bindTaskImageEvents()
 
   // Override save button
   document.getElementById('modalSave').onclick = async () => {
@@ -505,6 +507,79 @@ function openTaskModal(id, tasks) {
     closeModal()
     renderTasks(document.getElementById('adminContent'))
   }
+}
+
+function renderTaskImagesSection(task) {
+  const imgs = task.images || []
+  const isStatic = url => !url.includes('/txyx/api/')
+  return `
+    <div class="field-group" id="taskImagesSection">
+      <label class="field-label">封面图片</label>
+      <div class="task-img-grid" id="taskImgGrid">
+        ${imgs.map(url => `
+          <div class="task-img-item" data-url="${esc(url)}">
+            <img src="${esc(url.startsWith('/txyx/api/') ? url : '/txyx' + url)}" alt=""/>
+            ${isStatic(url)
+              ? `<span class="task-img-static-badge" title="内置图片，不可删除">内置</span>`
+              : `<button class="task-img-del" data-url="${esc(url)}" title="删除">✕</button>`}
+          </div>
+        `).join('')}
+        ${imgs.length < 6 ? `
+          <label class="task-img-add" title="上传图片（jpg/png，最大10MB）">
+            <span>+</span>
+            <input type="file" accept="image/jpeg,image/png,image/webp" style="display:none" id="taskImgUpload"/>
+          </label>` : ''}
+      </div>
+      <p style="font-size:11px;color:#aaa;margin-top:4px">最多6张，支持 jpg/png/webp，最大10MB</p>
+      <div id="taskImgMsg" style="font-size:12px;margin-top:4px"></div>
+    </div>
+  `
+}
+
+function bindTaskImageEvents() {
+  const grid   = document.getElementById('taskImgGrid')
+  const msgEl  = document.getElementById('taskImgMsg')
+  const taskId = _editingTask.id
+
+  // Delete
+  grid?.querySelectorAll('.task-img-del').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const url = btn.dataset.url
+      btn.disabled = true
+      const encoded = encodeURIComponent(url)
+      const r = await fetch(`${API_BASE}/tasks/${taskId}/images/${encoded}`, { method: 'DELETE' })
+      const data = await r.json()
+      if (!r.ok) { msgEl.textContent = data.error || '删除失败'; msgEl.style.color = '#e53935'; btn.disabled = false; return }
+      _editingTask.images = data.images
+      document.getElementById('taskImagesSection').outerHTML = renderTaskImagesSection(_editingTask)
+      bindTaskImageEvents()
+    })
+  })
+
+  // Upload
+  document.getElementById('taskImgUpload')?.addEventListener('change', async (e) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    msgEl.textContent = '上传中…'; msgEl.style.color = '#888'
+    try {
+      const b64 = await new Promise((res, rej) => {
+        const reader = new FileReader()
+        reader.onload  = () => res(reader.result)
+        reader.onerror = rej
+        reader.readAsDataURL(file)
+      })
+      const r = await fetch(`${API_BASE}/tasks/${taskId}/images`, {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: file.name, data: b64 }),
+      })
+      const data = await r.json()
+      if (!r.ok) { msgEl.textContent = data.error || '上传失败'; msgEl.style.color = '#e53935'; return }
+      msgEl.textContent = '✅ 上传成功'; msgEl.style.color = '#2d8a5a'
+      _editingTask.images = data.images
+      document.getElementById('taskImagesSection').outerHTML = renderTaskImagesSection(_editingTask)
+      bindTaskImageEvents()
+    } catch { msgEl.textContent = '上传失败，请重试'; msgEl.style.color = '#e53935' }
+  })
 }
 
 // ── Phase editor ──────────────────────────────────────────
