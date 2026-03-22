@@ -1,11 +1,11 @@
 import { asset } from '../utils/asset.js'
 
 const SLIDES = [
-  asset('/images/shimen/3.jpg'),    // 傍晚稻田·大楼灯光
+  asset('/images/shimen/3.jpg'),
   asset('/images/routes/scene8.jpg'),
-  asset('/images/shimen/2.jpg'),    // 鸟瞰全景·绿野稻田
+  asset('/images/shimen/2.jpg'),
   asset('/images/routes/scene4.jpg'),
-  asset('/images/shimen/1.jpg'),    // 石门湾正门
+  asset('/images/shimen/1.jpg'),
   asset('/images/routes/scene7.jpg'),
 ]
 
