@@ -368,13 +368,11 @@ http.createServer(async (req, res) => {
     const tasks = readJSON(TASKS_FILE) || DEFAULT_TASKS
     const idx   = tasks.findIndex(t => t.id === id)
     if (idx === -1) return send(res, 404, { error: '任务不存在' })
-    // Only delete files from uploads dir (not static public images)
-    if (filename.includes('/uploads/tasks/')) {
-      const base = filename.split('/').pop()
-      const fp   = path.join(UPLOADS_DIR, 'tasks', String(id), base)
-      if (fs.existsSync(fp)) fs.unlinkSync(fp)
-    }
-    tasks[idx].images = (tasks[idx].images || []).filter(u => u !== filename)
+    // filename is just the basename (e.g. "1234_photo.jpg")
+    const fp = path.join(UPLOADS_DIR, 'tasks', String(id), filename)
+    if (fs.existsSync(fp)) fs.unlinkSync(fp)
+    // Remove from images array by matching the trailing filename segment
+    tasks[idx].images = (tasks[idx].images || []).filter(u => u.split('/').pop() !== filename)
     writeJSON(TASKS_FILE, tasks)
     return send(res, 200, { ok: true, images: tasks[idx].images })
   }

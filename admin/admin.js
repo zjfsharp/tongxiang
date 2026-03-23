@@ -544,10 +544,10 @@ function bindTaskImageEvents() {
   // Delete
   grid?.querySelectorAll('.task-img-del').forEach(btn => {
     btn.addEventListener('click', async () => {
-      const url = btn.dataset.url
-      btn.disabled = true
-      const encoded = encodeURIComponent(url)
-      const r = await fetch(`${API_BASE}/tasks/${taskId}/images/${encoded}`, { method: 'DELETE' })
+      const url      = btn.dataset.url
+      btn.disabled   = true
+      const filename = url.split('/').pop()
+      const r = await fetch(`${API_BASE}/tasks/${taskId}/images/${encodeURIComponent(filename)}`, { method: 'DELETE' })
       const data = await r.json()
       if (!r.ok) { msgEl.textContent = data.error || '删除失败'; msgEl.style.color = '#e53935'; btn.disabled = false; return }
       _editingTask.images = data.images
