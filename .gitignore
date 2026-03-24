@@ -2,3 +2,7 @@
 node_modules
 dist/
 dist.tar.gz
+server/api.log
+server/api.pid
+server/data/
+server/uploads/

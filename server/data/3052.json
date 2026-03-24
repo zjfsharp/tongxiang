@@ -8,7 +8,7 @@
     "汤思怡"
   ],
   "createdAt": "2026-03-18T12:07:59.764Z",
-  "updatedAt": "2026-03-18T12:11:43.807Z",
+  "updatedAt": "2026-03-21T16:15:43.031Z",
   "phase1": {
     "questions": [
       "这是想知道的问题1",
@@ -71,5 +71,6 @@
   "_pwd": "1234",
   "phase1Done": true,
   "phase2Done": false,
-  "phase3Done": false
+  "phase3Done": false,
+  "taskId": 1
 }

@@ -1,7 +1,7 @@
 {
   "code": "3051",
   "createdAt": "2026-03-18T14:08:46.433Z",
-  "updatedAt": "2026-03-18T14:18:33.578Z",
+  "updatedAt": "2026-03-21T16:15:41.295Z",
   "password": "1234",
   "school": "桐乡市茅盾实验小学现代校区",
   "members": [
@@ -10,7 +10,7 @@
     "汤思怡"
   ],
   "hasPassword": true,
-  "phase1Done": false,
+  "phase1Done": true,
   "phase2Done": false,
   "phase3Done": false,
   "phase1": {
@@ -30,5 +30,50 @@
     ],
     "route": "跟着老师的安排走",
     "completedAt": "2026-03-18T14:18:33.576Z"
-  }
+  },
+  "phase2": {
+    "exhibition": {
+      "d1": "12",
+      "d2": "23",
+      "d3": "34",
+      "count": "3"
+    },
+    "sub1Done": true,
+    "equipment": [
+      {
+        "name": "11",
+        "function": "111"
+      },
+      {
+        "name": "22",
+        "function": "222"
+      },
+      {
+        "name": "33",
+        "function": "333"
+      },
+      {
+        "name": "44",
+        "function": "444"
+      }
+    ],
+    "sub2Done": true,
+    "extra": {
+      "text": "12345667",
+      "mood": "😮"
+    },
+    "sub3Done": true,
+    "completedAt": "2026-03-18T14:41:06.853Z"
+  },
+  "phase3": {
+    "resolved": {
+      "0": "yes",
+      "1": "yes",
+      "2": "yes"
+    },
+    "reflection": "1212121",
+    "completedAt": "2026-03-18T14:41:46.093Z",
+    "finalMood": "🤔"
+  },
+  "taskId": 1
 }
